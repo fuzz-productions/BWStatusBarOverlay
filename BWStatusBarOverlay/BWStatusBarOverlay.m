@@ -125,7 +125,12 @@
         
         _statusLabel = [[UILabel alloc] initWithFrame:self.activityView.frame];
         self.statusLabel.backgroundColor = [UIColor clearColor];
-        self.statusLabel.textAlignment = UITextAlignmentCenter;
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6
+		self.statusLabel.textAlignment = UITextAlignmentCenter;
+#else
+		self.statusLabel.textAlignment = NSTextAlignmentCenter;
+#endif
         [self.contentView addSubview:self.statusLabel];
         
         _textLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -135,8 +140,12 @@
                                           statusBarHeight);
         self.textLabel.backgroundColor = [UIColor clearColor];
         self.textLabel.font = TEXT_LABEL_FONT;
-        self.textLabel.textAlignment = UITextAlignmentCenter;
-        [self.contentView addSubview:self.textLabel];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6
+		self.textLabel.textAlignment = UITextAlignmentCenter;
+#else
+		self.textLabel.textAlignment = NSTextAlignmentCenter;
+#endif       
+		[self.contentView addSubview:self.textLabel];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressOnView:)];
         [self addGestureRecognizer:tapGestureRecognizer];
